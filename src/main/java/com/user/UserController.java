@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
  * -----------------------------------------------------------
  * 2025-08-12        koiw1       최초 생성
  */
-@RestController(value = "/public/user")
+@RestController(value = "/public")
 public class UserController {
 
-    @GetMapping
+    @GetMapping("/user")
     public String getUser() {
+
         return "123";
     }
 }
