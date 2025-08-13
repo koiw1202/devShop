@@ -1,20 +1,20 @@
 package com.config.error;
 
+import com.config.apiProtocol.DevShopResponseCode;
 import lombok.Getter;
 
 @Getter
 public class DevShopException extends RuntimeException {
 
-    private final Integer status ;
     private final String errCode;
     private final String externalMessage;
     private final String internalMessage;
 
-    public DevShopException(DevShopErrorCode devShopErrorCode) {
-        super(devShopErrorCode.getExternalMessage());
-        this.status = devShopErrorCode.getStatus();
-        this.errCode = devShopErrorCode.getErrCode();
-        this.externalMessage = devShopErrorCode.getExternalMessage();
-        this.internalMessage = devShopErrorCode.getInternalMessage();
+    public DevShopException(DevShopResponseCode devShopResponseCode) {
+        super(devShopResponseCode.getExternalMessage());
+
+        this.errCode = devShopResponseCode.getCode();
+        this.externalMessage = devShopResponseCode.getExternalMessage();
+        this.internalMessage = devShopResponseCode.getInternalMessage();
     }
 }

@@ -1,5 +1,8 @@
 package com.user.controller;
 
+import com.common.ApiUtils;
+import com.config.apiProtocol.DevShopResponseCode;
+import com.config.apiProtocol.ResponseBody;
 import com.user.entity.User;
 import com.user.entity.UserPk;
 import com.user.model.in.LogInVo;
@@ -7,6 +10,9 @@ import com.user.model.in.UserInfoVo;
 import com.user.model.out.UserInfoOutVo;
 import com.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +34,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/user")
-    public UserInfoOutVo getUserInfo(@AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<ResponseBody> getUserInfo(@AuthenticationPrincipal UserDetails userDetails) {
 
         UserPk userPk = UserPk.builder()
                 .userId(userDetails.getUsername())
@@ -36,10 +42,12 @@ public class UserController {
 
         User user = userService.getUserInfo(userPk);
 
-        return UserInfoOutVo.builder()
+        UserInfoOutVo userInfoOutVo = UserInfoOutVo.builder()
                 .userNo(user.getUserPk().getUserNo())
                 .nickName(user.getNickName())
                 .build();
+
+        return ApiUtils.createSuccessResponseEntity(userInfoOutVo);
     }
 
     @PostMapping("/login")

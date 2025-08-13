@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ExceptionController {
 
     @ExceptionHandler({DevShopException.class})
-    public ResponseEntity handleException(DevShopException devShopException) {
+    public ResponseEntity<ResponseBody> handleException(DevShopException devShopException) {
 
         DevShopMessage devShopMessage = DevShopMessage.builder()
                 .message(devShopException.getMessage())
@@ -20,10 +20,10 @@ public class ExceptionController {
 
         ResponseBody responseBody = ResponseBody.builder()
                 .data(null)
-                .message(devShopMessage)
+                .devShopMessage(devShopMessage)
                 .build();
 
-        return new ResponseEntity<>(responseBody, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity(responseBody, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }
