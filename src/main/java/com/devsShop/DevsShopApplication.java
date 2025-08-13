@@ -1,4 +1,4 @@
-package com.devsshop;
+package com.devsShop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
