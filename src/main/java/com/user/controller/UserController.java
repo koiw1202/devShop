@@ -1,11 +1,17 @@
 package com.user.controller;
 
+import com.user.entity.User;
 import com.user.entity.UserPk;
+import com.user.model.in.LogInVo;
+import com.user.model.in.UserInfoVo;
+import com.user.model.out.UserInfoOutVo;
 import com.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -22,16 +28,35 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/user")
-    public String getUserInfo(@AuthenticationPrincipal UserDetails user) {
+    public UserInfoOutVo getUserInfo(@AuthenticationPrincipal UserDetails userDetails) {
 
         UserPk userPk = UserPk.builder()
-                .userId(user.getUsername())
+                .userId(userDetails.getUsername())
                 .build();
 
-        userService.getUserInfo(userPk);
+        User user = userService.getUserInfo(userPk);
 
-        return "123";
-
+        return UserInfoOutVo.builder()
+                .userNo(user.getUserPk().getUserNo())
+                .nickName(user.getNickName())
+                .build();
     }
 
+    @PostMapping("/login")
+    public void logIn(@RequestBody LogInVo logInVo) {
+
+        boolean loginSuccessFlag = userService.logIn(logInVo);
+
+        //TODO: 메시지 문구 설정 필요
+        if(loginSuccessFlag) {
+
+        } else {
+
+        }
+    }
+
+    @PostMapping("/user")
+    public void addUser(@RequestBody UserInfoVo userInfoVo) {
+
+    }
 }

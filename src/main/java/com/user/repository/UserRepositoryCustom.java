@@ -5,6 +5,8 @@ import com.user.entity.UserPk;
 
 public interface UserRepositoryCustom {
 
-    public User getUserInfo(UserPk userPk);
+    User getUserInfo(UserPk userPk);
+
+
 
 }

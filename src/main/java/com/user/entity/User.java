@@ -18,16 +18,19 @@ public class User {
     @EmbeddedId
     private UserPk userPk;
 
-    @Column(name ="password", length = 255, nullable = false)
+    @Column(name ="password", nullable = false)
     private String password;
 
     @Column(name = "user_name", length = 20, nullable = false)
     private String userName;
 
+    @Column(name = "nick_name", length = 12, nullable = false)
+    private String nickName;
+
     @Column(name = "sex", length = 1, nullable = false)
     private String sex;
 
-    @Column(name = "phone_number", length = 12, nullable = false)
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
     @Column(name = "authority", length = 10, nullable = false)
