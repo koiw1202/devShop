@@ -1,0 +1,14 @@
+springdoc:
+  swagger-ui:
+    path: /docs                  # UI 경로 (선택)
+    csrf:
+      enabled: true              # Swagger-UI가 CSRF 토큰을 자동 전송
+      cookie-name: XSRF-TOKEN    # 기본값, 변경 가능
+      header-name: X-XSRF-TOKEN  # 기본값, 변경 가능
+  api-docs:
+    path: /api-docs              # JSON 스펙 경로 (선택)
+
+jwt:
+  secret-base64: ${JWT_SECRET_BASE64}   # 256bit(32바이트) 이상을 Base64로 인코딩해서 주입
+  access-ttl-seconds: 900               # 15분
+  refresh-ttl-seconds: 2592000          # 30일

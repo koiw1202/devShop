@@ -28,6 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .build();
 
         User user = userService.getUserInfo(userPk);
+
         List<GrantedAuthority> list = List.of(new SimpleGrantedAuthority(user.getAuthority().getRole()));
 
         return CustomUserDetails.builder()

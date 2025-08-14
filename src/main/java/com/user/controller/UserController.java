@@ -3,15 +3,15 @@ package com.user.controller;
 import com.common.ApiUtils;
 import com.config.apiProtocol.DevShopResponseCode;
 import com.config.apiProtocol.ResponseBody;
+import com.config.error.DevShopException;
 import com.user.entity.User;
 import com.user.entity.UserPk;
 import com.user.model.in.LogInVo;
 import com.user.model.in.UserInfoVo;
+import com.user.model.out.TokenOutVo;
 import com.user.model.out.UserInfoOutVo;
 import com.user.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -51,20 +51,75 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public void logIn(@RequestBody LogInVo logInVo) {
+    public ResponseEntity<ResponseBody> logIn(@RequestBody LogInVo logInVo) {
 
-        boolean loginSuccessFlag = userService.logIn(logInVo);
+        TokenOutVo tokenOutVo = userService.logIn(logInVo);
 
-        //TODO: 메시지 문구 설정 필요
-        if(loginSuccessFlag) {
-
+        if(tokenOutVo != null) {
+            return ApiUtils.createSuccessResponseEntity(tokenOutVo, DevShopResponseCode.LOGIN_SUCCESS);
         } else {
-
+            throw new DevShopException(DevShopResponseCode.LOGIN_FAIL);
         }
     }
 
     @PostMapping("/user")
-    public void addUser(@RequestBody UserInfoVo userInfoVo) {
+    public ResponseEntity<ResponseBody> addUser(@RequestBody UserInfoVo userInfoVo) {
+
+        int result = userService.addUser(userInfoVo);
+        if(result == 0) return ApiUtils.createSuccessResponseEntity(null, DevShopResponseCode.SIGN_UP_SUCCESS);
+        else throw new DevShopException(DevShopResponseCode.SIGN_UP_ERROR);
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

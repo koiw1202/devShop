@@ -26,4 +26,19 @@ public class ApiUtils {
         return new ResponseEntity(responseBody, HttpStatus.OK);
     }
 
+    public static ResponseEntity<ResponseBody> createSuccessResponseEntity(Object data, DevShopResponseCode devShopResponseCode) {
+
+        DevShopMessage devShopMessage = DevShopMessage.builder()
+                .message(devShopResponseCode.getExternalMessage())
+                .code(devShopResponseCode.getCode())
+                .build();
+
+        ResponseBody responseBody = ResponseBody.builder()
+                .data(data)
+                .devShopMessage(devShopMessage)
+                .build();
+
+        return new ResponseEntity(responseBody, HttpStatus.OK);
+    }
+
 }

@@ -41,8 +41,4 @@ public class User {
     @Enumerated(EnumType.ORDINAL)
     private BlockedFlag blockedFlag;
 
-
-
-
-
 }
