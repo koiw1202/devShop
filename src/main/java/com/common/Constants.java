@@ -1,5 +1,7 @@
 package com.common;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class Constants {
 
     public static final String SUCCESS_MESSAGE = "성공적으로 조회되었습니다.";
@@ -9,5 +11,8 @@ public class Constants {
 
     public static final long DEFAULT_PAGE_SIZE = 30;
 
+    public static final String accessToken = "ACCESS-TOKEN";
+    public static final String refreshToken = "REFRESH-TOKEN";
+    public static final ObjectMapper objectMapper = new ObjectMapper();
 
 }

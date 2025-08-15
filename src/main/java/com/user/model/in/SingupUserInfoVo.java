@@ -1,7 +1,5 @@
 package com.user.model.in;
 
-import com.user.entity.Authority;
-import com.user.entity.BlockedFlag;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,13 +9,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserInfoVo {
+public class SingupUserInfoVo {
 
     private String userId;
+    private String password;
     private String userName;
     private String nickName;
     private String sex;
     private String phoneNumber;
-    private Authority authority;
-    private BlockedFlag blockedFlag;
+
 }

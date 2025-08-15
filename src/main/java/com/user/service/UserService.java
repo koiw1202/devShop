@@ -1,6 +1,5 @@
 package com.user.service;
 
-import com.common.RequestHeaders;
 import com.config.apiProtocol.DevShopResponseCode;
 import com.config.error.DevShopException;
 import com.user.entity.Authority;
@@ -8,7 +7,7 @@ import com.user.entity.BlockedFlag;
 import com.user.entity.User;
 import com.user.entity.UserPk;
 import com.user.model.in.LogInVo;
-import com.user.model.in.UserInfoVo;
+import com.user.model.in.SingupUserInfoVo;
 import com.user.model.out.TokenOutVo;
 import com.user.repository.UserRepository;
 import jakarta.persistence.EntityManager;
@@ -17,13 +16,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.*;
-import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -106,25 +102,25 @@ public class UserService {
 
     /**
      * 회원가입
-     * @param userInfoVo
+     * @param singupUserInfoVo
      */
     @Transactional
-    public int addUser(UserInfoVo userInfoVo) {
+    public int addUser(SingupUserInfoVo singupUserInfoVo) {
 
-        Optional<User> userAlreadyExists = userRepository.findById(UserPk.builder().userId(userInfoVo.getUserId()).build());
+        Optional<User> userAlreadyExists = userRepository.findById(UserPk.builder().userId(singupUserInfoVo.getUserId()).build());
         if( userAlreadyExists != null) throw new DevShopException(DevShopResponseCode.USER_ALREADY_EXSITS);
 
         UserPk userPk = UserPk.builder()
-                .userId(userInfoVo.getUserId())
+                .userId(singupUserInfoVo.getUserId())
                 .build();
 
         User user = User.builder()
                 .userPk(userPk)
-                .password(userInfoVo.getPassword())
-                .userName(userInfoVo.getUserName())
-                .nickName(userInfoVo.getNickName())
-                .sex(userInfoVo.getSex())
-                .phoneNumber(userInfoVo.getPhoneNumber())
+                .password(singupUserInfoVo.getPassword())
+                .userName(singupUserInfoVo.getUserName())
+                .nickName(singupUserInfoVo.getNickName())
+                .sex(singupUserInfoVo.getSex())
+                .phoneNumber(singupUserInfoVo.getPhoneNumber())
                 .authority(Authority.USER)
                 .blockedFlag(BlockedFlag.NON_BLOCKED)
                 .build();

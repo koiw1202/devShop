@@ -5,6 +5,8 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.user.entity.User;
 import com.user.entity.UserPk;
 import com.user.model.in.AdminUserListInfo;
+import com.user.model.in.UserInfoVo;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -42,6 +44,7 @@ public class AdminUserRepositoryImpl implements AdminUserRepositoryCustom {
 
         return userList;
     }
+
 }
 
 

@@ -7,7 +7,7 @@ import com.config.error.DevShopException;
 import com.user.entity.User;
 import com.user.entity.UserPk;
 import com.user.model.in.LogInVo;
-import com.user.model.in.UserInfoVo;
+import com.user.model.in.SingupUserInfoVo;
 import com.user.model.out.TokenOutVo;
 import com.user.model.out.UserInfoOutVo;
 import com.user.service.UserService;
@@ -63,9 +63,9 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<ResponseBody> addUser(@RequestBody UserInfoVo userInfoVo) {
+    public ResponseEntity<ResponseBody> addUser(@RequestBody SingupUserInfoVo singupUserInfoVo) {
 
-        int result = userService.addUser(userInfoVo);
+        int result = userService.addUser(singupUserInfoVo);
         if(result == 0) return ApiUtils.createSuccessResponseEntity(null, DevShopResponseCode.SIGN_UP_SUCCESS);
         else throw new DevShopException(DevShopResponseCode.SIGN_UP_ERROR);
 
