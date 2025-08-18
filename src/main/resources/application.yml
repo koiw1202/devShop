@@ -9,6 +9,6 @@ springdoc:
     path: /api-docs              # JSON 스펙 경로 (선택)
 
 jwt:
-  secret-base64: ${JWT_SECRET_BASE64}   # 256bit(32바이트) 이상을 Base64로 인코딩해서 주입
+  secret-base64: 823e399822c5170927c9802b3feb60b1fe54debefb406ca5f4eaf05e0014ea63
   access-ttl-seconds: 900               # 15분
   refresh-ttl-seconds: 2592000          # 30일
